@@ -15,17 +15,5 @@ pipeline {
                 '''
             }
         }
-
-        stage('Verify Python') {
-            steps {
-                bat 'python --version'
-            }
-        }
-
-         stage('hello') {
-      steps {
-        sh 'python hello.py'
-      }
-    }
     }
 }
