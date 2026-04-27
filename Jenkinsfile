@@ -16,7 +16,6 @@ pipeline {
                             
                 ) ELSE (
                         echo Python not found. Installing...
-                        echo Installation completed.
                         powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.12.4/python-3.12.4-amd64.exe -OutFile python-installer.exe"
                         start /wait python-installer.exe /quiet PrependPath=1
                     echo Installation completed.
@@ -27,5 +26,10 @@ exit /b 0
                 '''
             }
         }
+         stage('hello') {
+      steps {
+        sh 'python hello.py'
+      }
+    }
     }
 }
