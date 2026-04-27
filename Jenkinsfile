@@ -1,15 +1,37 @@
 pipeline {
-  agent any
-  stages {
-    stage('version') {
-      steps {
-        sh 'python3 --version'
-      }
+    agent any
+
+    stages {
+
+        stage('Check Python') {
+            steps {
+                bat '''
+                where python >nul 2>nul
+                IF %ERRORLEVEL% NEQ 0 (
+                    echo Python not found. Installing...
+                    
+                    powershell -Command "Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.12.4/python-3.12.4-amd64.exe -OutFile python-installer.exe"
+                    
+                    start /wait python-installer.exe /quiet InstallAllUsers=1 PrependPath=1
+                    
+                    echo Installation completed.
+                ) ELSE (
+                    echo Python already installed.
+                )
+                '''
+            }
+        }
+
+        stage('Verify Python') {
+            steps {
+                bat 'python --version'
+            }
+        }
+
+        stage('Run Script') {
+            steps {
+                bat 'python your_script.py'
+            }
+        }
     }
-    stage('hello') {
-      steps {
-        sh 'python3 hello.py'
-      }
-    }
-  }
 }
