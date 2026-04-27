@@ -6,11 +6,12 @@ pipeline {
             steps {
                 bat '''
                 where python >nul 2>nul
-                IF %ERRORLEVEL% NEQ 0 (
-                    echo Python not found. Installing...
-                    echo Installation completed.
+                IF %ERRORLEVEL% EQU 0 (
+                 echo Python already installed.
+                 
                 ) ELSE (
-                    echo Python already installed.
+                      echo Python not found. Installing...
+                    echo Installation completed.
                 )
                 '''
             }
