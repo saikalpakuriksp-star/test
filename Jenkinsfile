@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHON_HOME = "C:\\Program Files\\Python312"
+        PATH = "${PYTHON_HOME};${PYTHON_HOME}\\Scripts;${env.PATH}"
+    }
+
     stages {
 
         stage('Check Python') {
@@ -22,12 +27,13 @@ pipeline {
             }
         }
 
-       stage('version') {
-      steps {
-        sh 'python3 --version'
-      }
-    }
-    stage('hello') {
+        stage('Verify Python') {
+            steps {
+                bat 'python --version'
+            }
+        }
+
+         stage('hello') {
       steps {
         sh 'python3 hello.py'
       }
