@@ -11,8 +11,6 @@ pipeline {
                             python --version
                 ) ELSE (
                         echo Python not found. Installing...
-        
-                    
                         echo Installation completed.
 )
 
