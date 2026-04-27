@@ -22,16 +22,15 @@ pipeline {
             }
         }
 
-        stage('Verify Python') {
-            steps {
-                bat 'python --version'
-            }
-        }
-
-        stage('Run Script') {
-            steps {
-                bat 'python your_script.py'
-            }
-        }
+       stage('version') {
+      steps {
+        sh 'python3 --version'
+      }
+    }
+    stage('hello') {
+      steps {
+        sh 'python3 hello.py'
+      }
+    }
     }
 }
